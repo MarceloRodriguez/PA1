@@ -1,17 +1,14 @@
-- - -
-Reproducible reseach
-=========================
-Peer Assessment 1
-=========================
-author: Marcelo J. Rodríguez
--------------------------
-date: Thursday, May 15, 2014  
-output: html_document  
-file: "PA1_template.Rmd"
-- - -
+---
+title: "PA1_template.Rmd"
+author: "Marcelo J. Rodríguez"
+date: "Thursday, May 15, 2014"
+output: html_document
+---
 
-Loading and preprocessing the data
--------------------------
+ 
+- - - 
+
+###Loading and preprocessing the data
 
 ```{r load_data, results='markup'}
 Data <- read.csv("C:/R.WD/Reproducible Research/PA1/activity.csv")
@@ -27,8 +24,7 @@ print(xtable(summary(Data)), type="html")
 
 - - -
   
-What is mean total number of steps taken per day?
--------------------------
+###What is mean total number of steps taken per day?
 
 ```{r steps_day, results='markup'}
 library(plyr)
@@ -50,8 +46,7 @@ abline(v=median.spd, col = c("blue"), lty = 2)
 
 - - -
   
-What is the average daily activity pattern?
--------------------------
+###What is the average daily activity pattern?
 
 ```{r steps_interval, results='markup'}
 spi <- ddply(Data, .(interval), summarize, steps = mean(steps, na.rm=TRUE))
@@ -71,8 +66,7 @@ The maximum number of steps per interval in average is `r max.spi` and correspon
   
 - - -
 
-Imputing missing values
--------------------------
+###Imputing missing values
 
 ```{r calc_na, results='markup'}
 miss <- dim(Data[is.na(Data$steps),])[1]
@@ -95,8 +89,7 @@ attach(Data1)
 ```
 - - -
 
-What is the new mean total number of steps taken per day?
--------------------------
+###What is the new mean total number of steps taken per day?
 
 ```{r steps_day1, results='markup'}
 spd1 <- ddply(Data1, .(date), summarize, steps = sum(steps))
@@ -136,8 +129,7 @@ abline(v=median.spd1, col = c("blue"), lty = 2)
   
 - - - 
 
-Are there differences in activity patterns between weekdays and weekends?
--------------------------
+###Are there differences in activity patterns between weekdays and weekends?
 
 ```{r create_weekday, results='markup'}
 Data1$day <- weekdays(as.Date(date))
@@ -150,6 +142,8 @@ Data1[day==d[6],5]<-"weekend"
 Data1$week <- as.factor(Data1$week)
 
 spiw <- ddply(Data1, .(interval,week), summarize, steps = mean(steps, na.rm=TRUE))
+max.spiw <- max(spiw$steps)
+max.intw <- spiw[spiw$steps==max(max.spiw),1]
 ```
 
 **Plot of the average number of steps taken each interval during weekends and weekdays**
@@ -159,6 +153,6 @@ library(ggplot2)
 ggplot(data=spiw, aes(x=interval, y=steps, group=week)) + geom_line(aes(color=week))+ facet_wrap(~ week, nrow=2)
 ```
 
-- - -
+
 
 
