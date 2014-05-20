@@ -2,7 +2,8 @@
 title: "PA1_template.Rmd"
 author: "Marcelo J. Rodríguez"
 date: "Thursday, May 15, 2014"
-output: html_document
+output:
+  html_document
 ---
 
  

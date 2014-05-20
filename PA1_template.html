@@ -57,12 +57,18 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <h3>Loading and preprocessing the data</h3>
 <pre class="r"><code>Data &lt;- read.csv(&quot;C:/R.WD/Reproducible Research/PA1/activity.csv&quot;)
 attach(Data)</code></pre>
+<pre><code>## The following objects are masked from Data1 (position 4):
+## 
+##     date, interval, steps
+## The following objects are masked from Data1 (position 5):
+## 
+##     date, interval, steps</code></pre>
 <pre class="r"><code>library(xtable)
 #Set the output options for numbers
 options(scipen = 9, digits = 3 )
 print(xtable(summary(Data)), type=&quot;html&quot;)</code></pre>
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Mon May 19 13:29:51 2014 -->
+<!-- Tue May 20 07:56:37 2014 -->
 <TABLE border="1">
 <TR> <TH>  </TH> <TH>     
 steps
@@ -181,6 +187,12 @@ ind &lt;- which(is.na(Data1$steps))
 Data1[ind,1] &lt;- spi[as.factor(Data1[ind,3]),2]
 detach(Data)
 attach(Data1)</code></pre>
+<pre><code>## The following objects are masked from Data1 (position 4):
+## 
+##     date, interval, steps
+## The following objects are masked from Data1 (position 5):
+## 
+##     date, interval, steps</code></pre>
 <hr />
 </div>
 <div id="what-is-the-new-mean-total-number-of-steps-taken-per-day" class="section level3">
@@ -199,7 +211,7 @@ mdays1 &lt;- dim(spd1[is.na(spd1$steps),])[1]</code></pre>
 names(t1)&lt;- c(&quot;Date&quot;,&quot;First estimate&quot;,&quot;Second estimate&quot;)
 print(xtable(t1), type=&quot;html&quot;)</code></pre>
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Mon May 19 13:30:00 2014 -->
+<!-- Tue May 20 07:56:44 2014 -->
 <TABLE border="1">
 <TR> <TH>  </TH> <TH> 
 Date
@@ -757,6 +769,12 @@ abline(v=median.spd1, col = c(&quot;blue&quot;), lty = 2)</code></pre>
 <pre class="r"><code>Data1$day &lt;- weekdays(as.Date(date))
 attach(Data1)</code></pre>
 <pre><code>## The following objects are masked from Data1 (position 3):
+## 
+##     date, interval, steps
+## The following objects are masked from Data1 (position 5):
+## 
+##     date, day, interval, steps
+## The following objects are masked from Data1 (position 6):
 ## 
 ##     date, interval, steps</code></pre>
 <pre class="r"><code>d &lt;- levels(factor(day))
